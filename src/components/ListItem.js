@@ -6,6 +6,7 @@ const API_URL = `${process.env.apiURL}/api/task`;
 const ListItem = ({ id, name, completed, refetch }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(name);
+  const isCompleted = Boolean(Number(completed));
 
   const handleDelete = () => {
     fetch(API_URL, {
@@ -23,7 +24,7 @@ const ListItem = ({ id, name, completed, refetch }) => {
       body: new URLSearchParams({
         'name': value,
         'id': id,
-        'due_date': '1999-9-9'
+        'completed': Boolean(Number(completed)) ? '1' : '0',
       })}
     ).then(() => {
       refetch();
@@ -34,7 +35,12 @@ const ListItem = ({ id, name, completed, refetch }) => {
   return (
     <div className="flex text-start px-5 py-2 gap-3">
       <div className="w-10">
-        <Checkbox checked={completed} />
+        <Checkbox 
+          id={id}
+          name={name} 
+          checked={isCompleted} 
+          refetch={refetch} 
+        />
       </div>
 
       {isEdit ? (
@@ -54,7 +60,7 @@ const ListItem = ({ id, name, completed, refetch }) => {
         </>
       ) : (
         <>
-          <div className={`flex-1 ${completed && 'line-through'}`}>
+          <div className={`flex-1 ${isCompleted && 'line-through'}`}>
             {name}
           </div>
         
