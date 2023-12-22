@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import ListItem from "@/components/ListItem";
 import Input from "@/components/Input";
 
+import { DUMMY } from "@/dummy";
+
 const Todo = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(DUMMY);
 
   const fetchList = () => {
-    fetch(`${process.env.apiURL}/api/task`)
-      .then(res => res.json())
-      .then(res => setTodos(res))
+   console.log('fetch list todos')
   }
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Todo = () => {
   }, []);
 
   const handleAddNew = (newTodo) => {
-    setTodos(prevState => [...prevState, newTodo])
+    console.log('add new todo', newTodo)
   }
 
   return (

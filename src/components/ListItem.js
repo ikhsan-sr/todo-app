@@ -9,27 +9,15 @@ const ListItem = ({ id, name, completed, refetch }) => {
   const isCompleted = Boolean(Number(completed));
 
   const handleDelete = () => {
-    fetch(API_URL, {
-      method: 'DELETE',
-      body: new URLSearchParams({
-        'key': 'id',
-        'id': id,
-      })}
-    ).then(() => refetch());
+    console.log('Delete todo id:', id);
+    // refetch
   }
 
   const handleEdit = () => {
-    fetch(API_URL, {
-      method: 'PUT',
-      body: new URLSearchParams({
-        'name': value,
-        'id': id,
-        'completed': Boolean(Number(completed)) ? '1' : '0',
-      })}
-    ).then(() => {
-      refetch();
-      setIsEdit(false);
-    });
+    console.log('Edit todo id:', id, value, completed);
+    // refetch
+    setIsEdit(false)
+    // setIsEdit false
   }
 
   return (
